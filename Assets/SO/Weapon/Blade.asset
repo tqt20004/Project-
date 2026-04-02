@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974b1b67b4d203f41a5aa7c74d1b05a8, type: 3}
+  m_Name: Blade
+  m_EditorClassIdentifier: 
+  price: 0
+  id: 10
+  quantity: 1
+  description: this is Blade
+  addInShop: 0
+  allData:
+  - rid: 6251768173002752000
+  - rid: 6251768173002752002
+  references:
+    version: 2
+    RefIds:
+    - rid: 6251768173002752000
+      type: {class: VisualData, ns: , asm: Assembly-CSharp}
+      data:
+        weaponSprite: {fileID: 21300000, guid: fb6782ff863a6534da85b1c701bcdd66, type: 3}
+        scale: {x: 0.9, y: 0.9, z: 1}
+    - rid: 6251768173002752002
+      type: {class: MeleeAtackData, ns: , asm: Assembly-CSharp}
+      data:
+        damage: 30
+        fireRate: 1

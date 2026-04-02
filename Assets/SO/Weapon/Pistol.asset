@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974b1b67b4d203f41a5aa7c74d1b05a8, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  price: 0
+  id: 15
+  quantity: 1
+  description: This is Beautiful Pistol!!
+  addInShop: 0
+  allData:
+  - rid: 9065108659280281603
+  - rid: 9065108659280281604
+  references:
+    version: 2
+    RefIds:
+    - rid: 9065108659280281603
+      type: {class: AttackData, ns: , asm: Assembly-CSharp}
+      data:
+        damage: 60
+        fireRate: 2
+        range: 180
+    - rid: 9065108659280281604
+      type: {class: VisualData, ns: , asm: Assembly-CSharp}
+      data:
+        weaponSprite: {fileID: 21300000, guid: 8c8360c710b668d41b8ba55c567a9cae, type: 3}
+        scale: {x: 1, y: 1, z: 1}
