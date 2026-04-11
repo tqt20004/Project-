@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public static Weapon Instance { get; private set; }
-    public WeaponDataSO weaponDataSO;
+    public ItemDataSO weaponDataSO;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour
     {
         
     }
-    public void SetSO(WeaponDataSO curSO)
+    public void SetSO(ItemDataSO curSO)
     {
         Debug.Log("called SetSo in Weapon class");
         weaponDataSO = curSO;

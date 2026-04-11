@@ -26,7 +26,7 @@ public class AttackBehavior : MonoBehaviour , IWeaponComponent
         Do();
     }
 
-    public void Init(WeaponDataSO data)
+    public void Init(ItemDataSO data)
     {
         Debug.Log("called Init in Attack");
         attackData = data.GetData<AttackData>();
@@ -69,6 +69,7 @@ public class AttackBehavior : MonoBehaviour , IWeaponComponent
         hit = Physics2D.Raycast(shottingGunPoint,dir,attackData.range, LayerMask.GetMask("Enemy"));
         if (hit.collider != null )
         {
+            SoundManager.Instance.PlayShotEffect();
             Debug.Log(hit.collider.name + "current position of hit is :" + hit.transform.position);
             AIBase target = hit.collider.GetComponentInChildren<AIBase>();
             if (target != null)

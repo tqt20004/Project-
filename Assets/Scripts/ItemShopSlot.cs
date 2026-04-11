@@ -16,14 +16,14 @@ public class ItemShopSlot : MonoBehaviour, IPointerClickHandler
     public GameObject isBuyedPanel;
     public GameObject isEquipedPanel;
 
-    public WeaponDataSO weaponDataSO;
+    public ItemDataSO weaponDataSO;
     public bool isFull = false;
     // Start is called before the first frame update
     void Start()
     {
         
     }
-    public void ReceiveSO(WeaponDataSO weaponDataSO)
+    public void ReceiveSO(ItemDataSO weaponDataSO)
     {
         this.weaponDataSO = weaponDataSO;
         if (weaponDataSO != null) isFull = true;

@@ -6,4 +6,5 @@ public class LevelData : ScriptableObject
 {
     public GameObject gridPrefab; 
     public string levelName;
+    public List<Wave> waves;
 }

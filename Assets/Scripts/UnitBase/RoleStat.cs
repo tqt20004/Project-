@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class RoleStats
 {
-    // Dictionary đúng y hệt trong hình
+    // Dictionary : nơi giữ data sống thật sự cho mỗi Entity , RoleStat sẽ lọc qua data và gắn vào đây
     public Dictionary<StatType, StatConfigBase> dictStats = new Dictionary<StatType, StatConfigBase>();
+    //muốn truy cập vào data sống phải truy cập vào RoleStat để lấy Dic(dict ko chỉ là nhà máy lọc dầu mà còn giữ data sống)
 
     // Hàm Init nhận vào RoleCfg (chứa list SO)
     public void Init(List<StatConfigSO> listSO)

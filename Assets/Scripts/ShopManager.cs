@@ -20,7 +20,7 @@ public class ShopManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+        
         }
         else
         {
@@ -59,7 +59,7 @@ public class ShopManager : MonoBehaviour
             // Né lỗi tràn mảng nếu số đồ mua vượt quá số ô UI
             if (i >= ItemShopSlotList.Count) break;
 
-            WeaponDataSO data = gameDatabase.allWeapons[i];
+            ItemDataSO data = gameDatabase.allWeapons[i];
             if (data != null)
             {
                 ItemShopSlotList[i].SetActiveIsEquiped(false);
@@ -85,6 +85,7 @@ public class ShopManager : MonoBehaviour
     }
     public void SelectWeaponFromSlot(ItemShopSlot clickedSlot)
     {
+        SoundManager.Instance.PlaySelectEffect();
         // 1. Duyệt qua danh sách các Slot và bắt tụi nó bỏ chọn hết
         foreach (var slot in ItemShopSlotList)
         {
@@ -97,7 +98,8 @@ public class ShopManager : MonoBehaviour
         clickedSlot.selected = true;
             clickedSlot.SetSelected();
             curItemShopSlot = clickedSlot;
-        }       
+        }
+        
     }
     public void buyItem()
     {
@@ -149,7 +151,13 @@ public class ShopManager : MonoBehaviour
     }
     public void EquipItem()
     {
+        SoundManager.Instance.PlaySelectEffect();
+        if (buyedItem.Contains(curItemShopSlot.weaponDataSO.id))
+        { 
         RunTimeData.instance.AddItemEquipedList(curItemShopSlot.weaponDataSO.id);
         upLoadDataForShop();
+        }
+        
     }
 }
+

@@ -7,7 +7,7 @@ public class VisualBehavior : MonoBehaviour,IWeaponComponent
 {
     public VisualData visualData;
     private SpriteRenderer spriteRenderer;
-    public void Init(WeaponDataSO curSO)
+    public void Init(ItemDataSO curSO)
     {
         visualData = curSO.GetData<VisualData>();
         if(spriteRenderer == null)

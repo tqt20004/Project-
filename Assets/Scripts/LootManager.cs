@@ -25,6 +25,17 @@ public class LootManager : MonoBehaviour
     }
     public void DropItem(Vector2 pos)
     {
-        Instantiate(moneyPrefab,pos,Quaternion.identity);
+        int amount = Random.Range(2, 31);
+
+        // 2. Spawn vật phẩm
+        GameObject droppedObj = Instantiate(moneyPrefab, pos, Quaternion.identity);
+
+        
+        if (droppedObj.TryGetComponent<Item>(out var item))
+        {
+            item.quantity = amount;
+            Debug.Log("111111111111");
+            
+        }
     }
 }

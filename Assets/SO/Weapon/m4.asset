@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974b1b67b4d203f41a5aa7c74d1b05a8, type: 3}
+  m_Name: m4
+  m_EditorClassIdentifier: 
+  price: 19
+  id: 8
+  quantity: 1
+  description: m4
+  addInShop: 1
+  name: m4
+  allData:
+  - rid: 2085226125821214722
+  - rid: 2085226125821214723
+  references:
+    version: 2
+    RefIds:
+    - rid: 2085226125821214722
+      type: {class: VisualData, ns: , asm: Assembly-CSharp}
+      data:
+        weaponSprite: {fileID: 21300000, guid: f6e4aaf80cb56d7409ff47f7cc32d18f, type: 3}
+        scale: {x: 1, y: 1, z: 1}
+    - rid: 2085226125821214723
+      type: {class: AttackData, ns: , asm: Assembly-CSharp}
+      data:
+        damage: 80
+        fireRate: 4.4
+        range: 120

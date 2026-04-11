@@ -17,6 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 245f303811aa12b42aa4e9b9538c4e00, type: 2}
   - {fileID: 11400000, guid: 0b5755475fb534d42acb9fed55a5cb53, type: 2}
   - {fileID: 11400000, guid: 53ddf55c4f7f00341b63ea504621a998, type: 2}
+  - {fileID: 11400000, guid: cbe055315e7511041970bf9ab6f50987, type: 2}
   rolePlayerConfigs:
   - {fileID: 11400000, guid: 8ad3b3e017bc07e46bdaf108aa784715, type: 2}
   - {fileID: 11400000, guid: f7447d6ecb9c942468ecffc84182dad7, type: 2}

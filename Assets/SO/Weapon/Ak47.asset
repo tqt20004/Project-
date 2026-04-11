@@ -12,25 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 974b1b67b4d203f41a5aa7c74d1b05a8, type: 3}
   m_Name: Ak47
   m_EditorClassIdentifier: 
-  price: 20
-  id: 0
+  price: 0
+  id: 1
   quantity: 1
-  description: this is AK47
+  description: this is
   addInShop: 1
+  name: Ak47
   allData:
-  - rid: 6595728920549523458
-  - rid: 9065108659280281602
+  - rid: 2085226087740866560
+  - rid: 2085226087740866561
   references:
     version: 2
     RefIds:
-    - rid: 6595728920549523458
+    - rid: 2085226087740866560
       type: {class: AttackData, ns: , asm: Assembly-CSharp}
       data:
-        damage: 102
-        fireRate: 2
-        range: 200
-    - rid: 9065108659280281602
+        damage: 440
+        fireRate: 0.6
+        range: 120
+    - rid: 2085226087740866561
       type: {class: VisualData, ns: , asm: Assembly-CSharp}
       data:
         weaponSprite: {fileID: 21300000, guid: f5b052766793e254486ef1f829c67922, type: 3}
-        scale: {x: 10, y: 10, z: 1}
+        scale: {x: 1, y: 1, z: 1}

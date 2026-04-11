@@ -11,11 +11,12 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
-    public WeaponDataSO infoSO;
+    public ItemDataSO infoSO;
 
     public int maxNumberOfItem;
     //----ItemData----//
 
+    public int id;
     public Sprite itemSprite;
     public int quantity;
     public string itemName;
@@ -38,7 +39,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     private Sprite emptySprite;
 
     // Start is called before the first frame update
-    public int AddItem(string itemName, Sprite itemSprite, int quantity, string itemDescription, WeaponDataSO infoSO)
+    public int AddItem(string itemName, Sprite itemSprite, int quantity, string itemDescription, ItemDataSO infoSO)
     {
         if (isFull)
             return quantity;
@@ -48,6 +49,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         itemImage.sprite = itemSprite;
         //this.itemDescription = itemDescription;
         this.infoSO = infoSO;
+        this.id = infoSO.id;
 
         this.quantity += quantity;
         if (this.quantity >= maxNumberOfItem)

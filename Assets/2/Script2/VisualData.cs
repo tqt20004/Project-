@@ -8,7 +8,7 @@ public class VisualData : ComponentData
     public Sprite weaponSprite;
     public Vector3 scale = Vector3.one;
 
-    public void Init(WeaponDataSO data)
+    public void Init(ItemDataSO data)
     {
         visualData = data.GetData<VisualData>();
         if (visualData != null)

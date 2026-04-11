@@ -52,7 +52,7 @@ public class MeleeAttackBehavior : MonoBehaviour, IWeaponComponent
         
     }
 
-    public void Init(WeaponDataSO data)
+    public void Init(ItemDataSO data)
     {
         meleeAtackData = data.GetData<MeleeAtackData>();
         if (meleeAtackData == null )

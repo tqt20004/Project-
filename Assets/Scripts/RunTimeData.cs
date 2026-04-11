@@ -8,6 +8,8 @@ public class RunTimeData : MonoBehaviour
     public GameData curGameData;
     public List<int> itemEquipedList;
     public RoleConfig curRoleCfg;
+    public int playerHealthPercent;
+    public int enemyHealthPercent;
     private void Awake()
     {
         if (instance == null)
@@ -32,17 +34,8 @@ public class RunTimeData : MonoBehaviour
     }
     public void SaveGame()
     {
-        // 1. Khởi tạo một cục Data mới để chứa
-        GameData newData = new GameData();
-
-        // 2. Đi gom dữ liệu từ các nơi (Chỉ gom những thằng đang tồn tại)
-        if (ShopManager.instance != null)
-        {
-            newData.buyedItem = ShopManager.instance.buyedItem;
-        }
-        newData.playerMoney = curGameData.playerMoney;
-
-        SaveLoadSystem.SaveGame(newData);
+        
+        SaveLoadSystem.SaveGame(curGameData);
     }
     public void AddMoney(int amount)
     {
@@ -65,4 +58,17 @@ public class RunTimeData : MonoBehaviour
         }
         itemEquipedList.Add(id);
     }
+    public int GetPlayerHealthModifier()
+    {
+        return playerHealthPercent;
+    }
+    public int GetEnemyHealthModifier()
+    {
+        return 0;
+    }
+    public void ChangePlayerHealth(int x)
+    {
+        playerHealthPercent = x;
+    }
+
 }

@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
     public bool isInventory = false;
     public GameObject inventoryBoard;
     public ItemSlot[] itemSlot;
-    public WeaponDataSO infoSO;
+    public ItemDataSO infoSO;
 
     public Button equipBotton;
     private void Awake()
@@ -19,11 +19,11 @@ public class InventoryManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            
         }
         else
         {
-            Destroy(instance);
+            Destroy(gameObject);
         }
     }
     // Start is called before the first frame update
@@ -55,7 +55,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-    public int AddItem(string name, Sprite image, int quantity, string itemDescription, WeaponDataSO infoSO)
+    public int AddItem(string name, Sprite image, int quantity, string itemDescription, ItemDataSO infoSO)
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {

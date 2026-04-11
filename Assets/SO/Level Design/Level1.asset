@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPrefab: {fileID: 2480980792401811347, guid: 3de8f57513b116646bc1c3d7437512b8, type: 3}
   levelName: level1
+  waves:
+  - {fileID: 11400000, guid: d5a2249eb59063949a51d4452b5ee50d, type: 2}
+  - {fileID: 11400000, guid: d5a2249eb59063949a51d4452b5ee50d, type: 2}

@@ -22,6 +22,7 @@ public class InteractNPC : MonoBehaviour
             playerInRange = true;
             ShopUI.instance.SetActiveShopPanel(true);
         }
+        SoundManager.Instance.PlaySelectEffect();
     }
     private void OnTriggerExit2D(Collider2D collision)
     {

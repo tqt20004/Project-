@@ -19,10 +19,22 @@ public class AIBase : MonoBehaviour
     private void Awake()
     {
         roleStats = new RoleStats();
+        
+    }
+    public void Init(RoleConfig roleC , int x)
+    {
+        this.roleConfig = roleC;
         roleStats.Init(roleConfig.statList);
+        Debug.Log("one");
+        SetSprite(); // 3. Đổi hình
+
+        var hpStat = roleStats.GetStat(StatType.health);
+        hpStat.basePercentValue = x; // đặt tạm 2 , sau này lấy từ RunTimeData
+        hpStat.currentValue = hpStat.GetFinalValue();
     }
     void Start()
     {
+        Debug.Log("two");
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetSprite();
         //sau này tạo method if RoleX = methodY;
@@ -72,6 +84,7 @@ public class AIBase : MonoBehaviour
         if(!Input.GetKeyDown(KeyCode.Space)) return;
         target = targetSelector.GetTarget(transform, 3f);
         Debug.Log(target);
+        Debug.Log(roleStats.dictStats);
     }
     public void AddEffect(EffectBase eb)
     {

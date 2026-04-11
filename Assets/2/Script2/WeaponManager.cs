@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    public WeaponDataSO currentWeapon;
-    public WeaponDataSO[] weaponArray;
+    public ItemDataSO currentWeapon;
+    public ItemDataSO[] weaponArray;
 
     public static WeaponManager Instance;
     private void Awake()
@@ -45,7 +45,7 @@ public class WeaponManager : MonoBehaviour
         }
         Weapon.Instance.SetSO(currentWeapon);
     }
-    public bool ReceiveDataWeapon(WeaponDataSO newData)
+    public bool ReceiveDataWeapon(ItemDataSO newData)
     {
         if (newData == null) return false;
 
@@ -64,7 +64,7 @@ public class WeaponManager : MonoBehaviour
         Debug.Log("Đã thêm vũ khí mới thành công!");
         return true; // Trả về true để bên Inventory thực hiện xóa item
     }
-    public void AddToArray(WeaponDataSO newData)
+    public void AddToArray(ItemDataSO newData)
     {
         bool isFull = true;
         for (int i = 0; i < weaponArray.Length; i++)

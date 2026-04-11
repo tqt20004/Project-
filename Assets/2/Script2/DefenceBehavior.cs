@@ -5,7 +5,7 @@ using UnityEngine;
 public class DefenceBehavior : MonoBehaviour, IWeaponComponent
 {
     public DefenceData defenceData; 
-    public void Init(WeaponDataSO data)
+    public void Init(ItemDataSO data)
     {
         defenceData = data.GetData<DefenceData>();
         if (defenceData != null)

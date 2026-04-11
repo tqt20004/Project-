@@ -3,7 +3,7 @@
 public class Item : MonoBehaviour
 {
     [Header("Data Config")]
-    public WeaponDataSO weaponDataSO;
+    public ItemDataSO weaponDataSO;
 
 
     Rigidbody2D rb;
@@ -48,10 +48,10 @@ public class Item : MonoBehaviour
         this.name = name;
         this.sprite = sprite;
         this.description = description;
-        this.quantity = quantity;
-        
+        if (this.quantity == 0) this.quantity = quantity;
+
     }
-    public void GetSO(WeaponDataSO weaponDataSO)
+    public void GetSO(ItemDataSO weaponDataSO)
     {
         this.weaponDataSO = weaponDataSO;
         //VisualData visualData =GetComponent<VisualData>();
@@ -67,11 +67,10 @@ public class Item : MonoBehaviour
    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("touch");
+        
         // 1. Check xem cái va chạm vào mình có phải là Player không (Dùng Tag cho nhanh)
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("touch2");
             aiBase = collision.gameObject.GetComponent<AIBase>();
                 // 3. Đẩy dữ liệu vào Inventory
                 var temp = InventoryManager.instance.AddItem(name, sprite, quantity, description, weaponDataSO);

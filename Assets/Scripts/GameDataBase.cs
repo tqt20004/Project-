@@ -7,10 +7,10 @@ public class GameDatabase : ScriptableObject
 {
 
     [Header("Inventory Items")]
-    public List<WeaponDataSO> allWeapons;
+    public List<ItemDataSO> allWeapons;
     public List<RoleConfig> rolePlayerConfigs;
     // Hàm tra cứu vũ khí
-    public WeaponDataSO GetWeaponByID(int id)
+    public ItemDataSO GetWeaponByID(int id)
     {
         return allWeapons.Find(x => x.id == id);
     }

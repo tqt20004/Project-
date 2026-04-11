@@ -3,13 +3,14 @@ using System.Linq; // Cần cái này để dùng OfType
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewWeaponData", menuName = "ModularSystem/Weapon Data")]
-public class WeaponDataSO : ItemDataSO
+public class ItemDataSO :ScriptableObject
 {
     public int price;
     public int id;
     public int quantity;
     public string description;
     public bool addInShop;
+    public string name;
     //// [SerializeReference] cho phép Unity hiện menu chọn class con trong Inspector
     [SerializeReference]
     [SubclassSelector]

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IWeaponComponent 
 {
-    public void Init(WeaponDataSO data);
+    public void Init(ItemDataSO data);
 }

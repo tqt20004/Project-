@@ -6,6 +6,7 @@ using Unity.AI.Navigation;
 using NavMeshPlus.Components;
 using System;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -18,9 +19,11 @@ public class GameManager : MonoBehaviour
     public enum GameState { MainMenu, Playing, Paused, GameOver }
     public GameState CurrentState;
     public CinemachineVirtualCamera VirtualCamera;
+    public RoleConfig curRoleConfigPlayer;
     // Trong phần khai báo biến của GameManager
     [SerializeField]
     public NavMeshPlus.Components.NavMeshSurface surfaceNav;
+    public WaveSpawner waveSpawner;
     [Header("Game Data")]
     public int Score = 0;
 
@@ -29,7 +32,14 @@ public class GameManager : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
     }
-
+    private void OnEnable()
+    {
+        WaveSpawner.WaveCleared += SetGameOver ;
+    }
+    private void OnDisable()
+    {
+        WaveSpawner.WaveCleared -= SetGameOver ;
+    }
     private void Start()
     {
         GameData data = SaveLoadSystem.LoadGame();
@@ -45,10 +55,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Bake();
-        }
+        
         // Chạy logic theo từng trạng thái
         switch (CurrentState)
         {
@@ -91,16 +98,20 @@ public class GameManager : MonoBehaviour
         Score = 0;
         Debug.Log("chạy");
         //LevelManager.Instance.SpawnMap();
-
-        GameObject temp = ObjectSpawner.Instance.SpawnPlayer(RunTimeData.instance.curRoleCfg);
-            GameObject temp2 = ObjectSpawner.Instance.SpawnEnemy();
-            VirtualCamera.Follow = temp.transform;
+        if (RunTimeData.instance != null && RunTimeData.instance.curRoleCfg != null)
+        {
+            curRoleConfigPlayer = RunTimeData.instance.curRoleCfg;
+        }
+        GameObject temp = ObjectSpawner.Instance.SpawnPlayer(curRoleConfigPlayer);
+        //GameObject temp2 = ObjectSpawner.Instance.SpawnEnemy();
+        waveSpawner.Spawn1();
+        VirtualCamera.Follow = temp.transform;
             CamFollow(temp);
     }
     void UpdatePlaying()
     {
         if (Input.GetKeyDown(KeyCode.P)) ChangeState(GameState.Paused);
-        // Check điều kiện thua ở đây để ChangeState(GameState.GameOver);
+        if (Input.GetKeyDown(KeyCode.I)) ChangeState(GameState.GameOver);
     }
 
     // 3. PAUSED
@@ -115,7 +126,10 @@ public class GameManager : MonoBehaviour
     // 4. GAME OVER
     void SetupGameOver()
     {
-        Debug.Log("Thua rồi con ạ! Điểm: " + Score);
+        Debug.Log("End! Điểm: " + Score);
+        AddMoney();
+
+        BackToPreviousScene();
     }
     void UpdateGameOver() 
     { 
@@ -124,7 +138,7 @@ public class GameManager : MonoBehaviour
     void SpawnItem(int id)
     { 
         // đưa id vào sẽ tự spawn ra trên Game
-        WeaponDataSO weaponDataSO = Database.GetWeaponByID(id);
+        ItemDataSO weaponDataSO = Database.GetWeaponByID(id);
         if (weaponDataSO == null) return;
         //Vector3 vector3 = new Vector3(0, 7 , 0 );
         GameObject z = Instantiate(itemPrefab);
@@ -143,25 +157,50 @@ public class GameManager : MonoBehaviour
             VirtualCamera.LookAt = entity.transform;
         }
     }
-    public void Bake()
-    {
-        if (surfaceNav == null)
-        {
-            Debug.LogError("NavMeshSurface chưa được gán!");
-            return;
-        }
+    //public void Bake()
+    //{
+    //    if (surfaceNav == null)
+    //    {
+    //        Debug.LogError("NavMeshSurface chưa được gán!");
+    //        return;
+    //    }
 
-        Physics2D.SyncTransforms();
-        surfaceNav.RemoveData();
-        surfaceNav.BuildNavMesh();
+    //    Physics2D.SyncTransforms();
+    //    surfaceNav.RemoveData();
+    //    surfaceNav.BuildNavMesh();
 
-        Debug.Log("Bake called");
-    }
+    //    Debug.Log("Bake called");
+    //}
     public void AutomaticSpawnEquipedItem()
     {
         foreach (var  i  in RunTimeData.instance.itemEquipedList)
         {
             SpawnItem(i);
         }
+    }
+    public void AddMoney()
+    {
+        foreach (var i in InventoryManager.instance.itemSlot)
+        {
+            if(i.id == 22)
+            {
+                Score += i.quantity;
+            }
+        }
+        RunTimeData.instance.AddMoney(Score);
+        Debug.Log("đã + : " + Score + " money");
+        RunTimeData.instance.SaveGame();
+    }
+    public void SetGameOver()
+    {
+        ChangeState(GameState.GameOver);
+    }
+    public void BackToPreviousScene()
+    {
+        SceneManager.LoadScene("2");
+    }
+    public void SaveGame()
+    {
+        RunTimeData.instance?.SaveGame();
     }
 }
