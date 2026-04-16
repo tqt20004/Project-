@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "New Level", menuName = "Data/Wave")]
 
-public class Wave : ScriptableObject
+public class WaveCfg : ScriptableObject
 {
     public int waveID;
     public int count;

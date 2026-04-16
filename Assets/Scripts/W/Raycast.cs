@@ -26,7 +26,7 @@ public class CircleSelector : ITargetSelector
             Debug.Log("Tên vật thể quét trúng: " + hit.name); // Xem nó có quét trúng con quái nào không
 
             AIBase target = hit.GetComponentInChildren<AIBase>();
-            if (target != null && target.gameObject != seeker.gameObject)
+            if (target != null && target.gameObject != seeker.gameObject && target.roleConfig.isPlayer == false)
             {
                 return target;
             }

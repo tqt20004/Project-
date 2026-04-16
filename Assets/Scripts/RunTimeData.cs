@@ -8,8 +8,11 @@ public class RunTimeData : MonoBehaviour
     public GameData curGameData;
     public List<int> itemEquipedList;
     public RoleConfig curRoleCfg;
+    public LevelData LevelData;
+    //------------//
     public int playerHealthPercent;
     public int enemyHealthPercent;
+    public int curLevel;
     private void Awake()
     {
         if (instance == null)
@@ -30,6 +33,7 @@ public class RunTimeData : MonoBehaviour
     public GameData Load()
     {
         curGameData = SaveLoadSystem.LoadGame();
+        playerHealthPercent = curGameData.playerLevel;
         return curGameData;    
     }
     public void SaveGame()
@@ -40,6 +44,10 @@ public class RunTimeData : MonoBehaviour
     public void AddMoney(int amount)
     {
         curGameData.playerMoney += amount;
+    }
+    public void AddExperience(int amount)
+    {
+        curGameData.player_Experience += amount;
     }
     public void SpendMoney(int amount)
     {
@@ -70,5 +78,13 @@ public class RunTimeData : MonoBehaviour
     {
         playerHealthPercent = x;
     }
-
+    public void UpgradeLevel()
+    {
+        int x = curGameData.playerLevel += 1;
+        ChangePlayerHealth(x);
+    }
+    public void SetLevel(LevelData level)
+    {
+        this.LevelData = level;   
+    }
 }

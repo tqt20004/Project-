@@ -9,8 +9,13 @@ public class Controller : MonoBehaviour
     public string myTag;
     public NavMeshAgent agent;
     public Vector3 target;
+    public AIBase owner;
+    private ITargetSelector targetSelector;
+
     void Start()
     {
+        GetAiBase();
+        GetITargetSelectorMethod();
         CheckAndAttach();
     }
     void CheckAndAttach()
@@ -42,7 +47,27 @@ public class Controller : MonoBehaviour
         if (myTag == "Player") PlayerMove();
         else if(myTag == "Enemy") EnemyMove();
         else return;
+        CheckRay();
 
+    }
+    void GetAiBase()
+    {
+       owner = transform.root.GetComponentInChildren<AIBase>();
+    }
+    void GetITargetSelectorMethod()
+    {
+        if(owner == null) return;
+        this.targetSelector = owner.targetSelector;
+    }
+    void CheckRay()
+    {
+        if(owner.roleConfig.isPlayer == false) return;
+        if (!Input.GetKeyDown(KeyCode.Space)) return;
+        if(targetSelector == null) GetITargetSelectorMethod();
+        AIBase z = targetSelector.GetTarget(transform, 3f);
+        owner.SetTargetForSkill(0,z);
+        owner.RequestUseSkill(0);
+        Debug.Log(target);
     }
     void PlayerMove()
     {

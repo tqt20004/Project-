@@ -27,8 +27,8 @@ MonoBehaviour:
     - rid: 2085226087740866560
       type: {class: AttackData, ns: , asm: Assembly-CSharp}
       data:
-        damage: 440
-        fireRate: 0.6
+        damage: 1140
+        fireRate: 1.2
         range: 120
     - rid: 2085226087740866561
       type: {class: VisualData, ns: , asm: Assembly-CSharp}

@@ -12,10 +12,11 @@ public class AIBase : MonoBehaviour
     public RoleStats roleStats;
     public ITargetSelector targetSelector; //đánh quét tròn hay bắn tia Ray
     public AIBase target;
+    bool isDead;
     //public IMoveMent moveMent; // Navmesh và Input 
     public SpriteRenderer spriteRenderer;
     public event Action<float, float> OnHealthChanged;
-    public static event Action<Vector2> OnDie;  
+    public static event Action<AIBase,Vector2> OnDie;  
     private void Awake()
     {
         roleStats = new RoleStats();
@@ -34,7 +35,6 @@ public class AIBase : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log("two");
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetSprite();
         //sau này tạo method if RoleX = methodY;
@@ -56,14 +56,55 @@ public class AIBase : MonoBehaviour
 
     void Update()
     {
-        CheckRay();
-        // 1. Quét Skill , gắn BaseEffect connect owner ,và add vào list Effect
+        // 1. Luôn luôn hồi Cooldown cho tất cả skill
         foreach (var s in skills)
         {
             s.OnUpdate();
+        }
+
+        // 2. Luôn luôn cập nhật các hiệu ứng (Effect)
+        for (int i = activeEffects.Count - 1; i >= 0; i--)
+        {
+            activeEffects[i].OnUpdate();
+            if (activeEffects[i].IsExpired) activeEffects.RemoveAt(i);
+        }
+        // 2. PHẦN MỚI: Cái "Tay" tự động cho Enemy
+        if (!roleConfig.isPlayer && target != null)
+        {
+            // Enemy cứ thấy có target là nó tự động yêu cầu dùng Skill 0
+            RequestUseSkill(0);
+        }
+        //CheckRay();
+        //// 1. Quét Skill , gắn BaseEffect connect owner ,và add vào list Effect
+        //foreach (var s in skills)
+        //{
+        //    s.OnUpdate();
+        //    if (s.CheckCondition())
+        //    {
+        //        s.Execute();
+        //        // Nếu cái Skill này là loại "Đánh xong là mất dấu" (Súng Player)
+        //        if (s.skillConfig.isResetTarget)
+        //        {
+        //            target = null;
+        //            Debug.Log("<color=cyan>[AIBase]</color> Skill yêu cầu Reset Target!");
+        //        }
+        //    }
+        //}
+        //// 2. Quét Robot Effect
+        //for (int i = activeEffects.Count - 1; i >= 0; i--)
+        //{
+        //    activeEffects[i].OnUpdate();
+        //    if (activeEffects[i].IsExpired == true) activeEffects.RemoveAt(i);
+        //}
+    }
+    public void RequestUseSkill(int index)
+    {
+        if (index < 0 || index >= skills.Count) return; // Luôn dùng >= với Count
+        SkillBase s = skills[index]; 
+            //s.OnUpdate();
             if (s.CheckCondition())
             {
-                s.Execute(); 
+                s.Execute();
                 // Nếu cái Skill này là loại "Đánh xong là mất dấu" (Súng Player)
                 if (s.skillConfig.isResetTarget)
                 {
@@ -71,14 +112,14 @@ public class AIBase : MonoBehaviour
                     Debug.Log("<color=cyan>[AIBase]</color> Skill yêu cầu Reset Target!");
                 }
             }
-        }
+        
         // 2. Quét Robot Effect
-        for (int i = activeEffects.Count - 1; i >= 0; i--)
-        {
-            activeEffects[i].OnUpdate();
-            if (activeEffects[i].IsExpired == true) activeEffects.RemoveAt(i);
-        }
-    }
+        //for (int i = activeEffects.Count - 1; i >= 0; i--)
+        //{
+        //    activeEffects[i].OnUpdate();
+        //    if (activeEffects[i].IsExpired == true) activeEffects.RemoveAt(i);
+        //}
+    }    
     void CheckRay()
     {
         if(!Input.GetKeyDown(KeyCode.Space)) return;
@@ -116,8 +157,14 @@ public class AIBase : MonoBehaviour
             float finalDamage = Mathf.Max(0, value - (defValue * 0.1f));
             Debug.Log(finalDamage + " final");
             stat.currentValue -= finalDamage;
+            if (stat.currentValue <= 0)
+            {
+                stat.currentValue = 0;
+                OnHealthChanged?.Invoke(0, stat.GetFinalValue());
+                Die();
+                return;
+            }
             OnHealthChanged?.Invoke(stat.currentValue, stat.GetFinalValue());
-            if (stat.currentValue <= 0) Die();
         }
         else
         {
@@ -129,13 +176,27 @@ public class AIBase : MonoBehaviour
     }
     public void Die()
     {
-        OnDie?.Invoke(transform.position);
-        Destroy(transform.root.gameObject);
+        if(isDead) return;
+        isDead = true;
+        OnDie?.Invoke(this,transform.position);
+        Destroy(transform.root.gameObject);    
     }
     public void SetSprite()
     {
         if (spriteRenderer != null) { 
         spriteRenderer.sprite = roleConfig.chacracterSprite; }
     }
-  
+    public void SetTargetForSkill(int index, AIBase potentialTarget)
+    {
+        if (index < 0 || index >= skills.Count) return;
+        if (skills[index].cooldownTimer <= 0)
+        {
+            this.target = potentialTarget;
+        }
+        else
+        {
+            this.target = null; // Chặn đứng việc "ghi nhớ" thằng cũ
+        }
+    }
+
 }

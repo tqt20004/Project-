@@ -6,5 +6,14 @@ public class LevelData : ScriptableObject
 {
     public GameObject gridPrefab; 
     public string levelName;
-    public List<Wave> waves;
+    public List<WaveCfg> waves;
+    public rank rank;
+}
+public enum rank
+{
+    easy,
+    medium,
+    hard,
+    nightmare,
+    asian
 }

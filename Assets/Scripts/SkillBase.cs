@@ -5,7 +5,7 @@ public class SkillBase
 {
     public AIBase owner;
     public SkillConfig skillConfig;
-    private float cooldownTimer;
+    public float cooldownTimer;
   
 
     public SkillBase(AIBase owner, SkillConfig config)

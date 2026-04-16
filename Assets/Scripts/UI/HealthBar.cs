@@ -47,7 +47,7 @@ public class HealthBar : MonoBehaviour
     // Hàm này sẽ tự động chạy mỗi khi owner.TakeDamage() được gọi
     private void UpdateHealthBar(float current, float max)
     {
-        Debug.Log($"[UI] {gameObject.name} của {owner.name} update: {current}/{max}");
+        //Debug.Log($"[UI] {gameObject.name} của {owner.name} update: {current}/{max}");
         Debug.Log("current and Max health " + current+"/" + max);
         if (healthBarFill != null && max > 0)
         {

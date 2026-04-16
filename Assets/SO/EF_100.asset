@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b740568a7f4b0494bb71e6edac1d7aa3, type: 3}
   m_Name: EF_100
   m_EditorClassIdentifier: 
-  codeName: 100 Damage
+  codeName: 520 Damage
   duration: 1
   effectActiveEvent: 0
-  value: 100
+  value: 520
   interval: 1
   targetStatType: 0

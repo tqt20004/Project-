@@ -6,24 +6,30 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
     public LevelData levelData;
-    public Wave wave;
+    public WaveCfg wave;
     public int enemyAlive;
     bool isWaveEnd = false;
     int index;
+    public RunTimeData runTimeData;
     public static Action WaveCleared; 
     private void OnEnable()
     {
         // Khi có bất kỳ AI nào chết
-        AIBase.OnDie += EnemyDie;
+        LevelManager.OnEnemyKilled += EnemyDie;
     }
     // Khi Object này bị tắt hoặc Scene bị hủy
     private void OnDisable()
     {
         // Hủy đăng ký để tránh lỗi bộ nhớ (Quan trọng!)
-        AIBase.OnDie -= EnemyDie;
+        LevelManager.OnEnemyKilled -= EnemyDie;
     }
     // Start is called before the first frame update
-
+    private void Start()
+    {
+        this.runTimeData = RunTimeData.instance;
+        this.levelData = runTimeData.LevelData;
+        Debug.Log(runTimeData.LevelData.name);
+    }
     public void Spawn()
     {
         for (int i = 0; i < wave.count; i++)
