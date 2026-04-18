@@ -271,6 +271,7 @@ MonoBehaviour:
   myTag: 
   agent: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
+  owner: {fileID: 0}
   references:
     version: 2
     RefIds:
@@ -489,7 +490,7 @@ GameObject:
   - component: {fileID: 5536095903978825974}
   - component: {fileID: 3297023416476863618}
   - component: {fileID: 924326014707184938}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
