@@ -2,6 +2,8 @@ Mô Tả:
 Một dự án game Top-down Shooter được xây dựng với tư duy Data Driven và Scalable Architecture.
 Tập trung vào việc tách biệt logic để dễ dàng mở rộng tính năng mà không làm hỏng cấu trúc có sẵn.
 
+Sơ Đồ UML 2 hệ thống chính :https://github.com/tqt20004/my-portflolio/blob/main/UML.png
+
 - Pattern:
 
 +SpawnSystem Sử dụng kết hợp Strategy Pattern và Factory Pattern.
