@@ -2,8 +2,6 @@ Mô Tả:
 Một dự án game Top-down Shooter được xây dựng với tư duy Data Driven và Scalable Architecture.
 Tập trung vào việc tách biệt logic để dễ dàng mở rộng tính năng mà không làm hỏng cấu trúc có sẵn.
 
-Sơ Đồ UML 2 hệ thống chính :https://github.com/tqt20004/my-portflolio/blob/main/UML.png
-
 - Pattern:
 
 +SpawnSystem Sử dụng kết hợp Strategy Pattern và Factory Pattern.
@@ -12,7 +10,8 @@ Sơ Đồ UML 2 hệ thống chính :https://github.com/tqt20004/my-portflolio/b
 - Các hệ thống chính:
 
 + Item: Xây dựng theo hướng (Data-Driven) , Các vũ khí được tách biệt hành vi và dữ liệu và liên kết bằng mapping turn on turn off từ động phù hợp với dữ liệu khi nhận 
-
+  UML:https://github.com/tqt20004/my-portflolio/blob/main/WeaponSystem.png
+  
 + Skill System:
   UML: https://github.com/tqt20004/my-portflolio/blob/main/UML_SkillSystem.png
 AiBase & SkillBase (The Actors): * AiBase đóng vai trò là thực thể gốc (Container), quản lý danh sách các SkillBase.
