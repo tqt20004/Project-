@@ -14,6 +14,7 @@ Sơ Đồ UML 2 hệ thống chính :https://github.com/tqt20004/my-portflolio/b
 + Item: Xây dựng theo hướng (Data-Driven) , Các vũ khí được tách biệt hành vi và dữ liệu và liên kết bằng mapping turn on turn off từ động phù hợp với dữ liệu khi nhận 
 
 + Skill System:
+  UML: https://github.com/tqt20004/my-portflolio/blob/main/UML_SkillSystem.png
 AiBase & SkillBase (The Actors): * AiBase đóng vai trò là thực thể gốc (Container), quản lý danh sách các SkillBase.
 SkillBase giữ logic thực thi và tham chiếu ngược lại owner (AiBase) để truy xuất các thông tin cần thiết khi tung chiêu.
 RoleCfg & SkillCfg (The Data): * Đây là "linh hồn" của hệ thống dưới dạng Data-Driven. RoleCfg định nghĩa bộ kỹ năng khởi tạo cho một Role.
